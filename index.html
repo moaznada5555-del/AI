@@ -13,7 +13,6 @@
         }
         body {
             background-color: #020617;
-            /* إضافة الصورة الرقمية المتوهجة في الخلفية مثل الديزاين الأصلي تماماً */
             background-image: 
                 url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964&auto=format&fit=crop'), 
                 radial-gradient(circle at top right, rgba(30, 64, 175, 0.6), transparent 50%),
@@ -39,7 +38,20 @@
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
         
-        /* اللوجو أعلى الشمال */
+        /* الصورة الجديدة أعلى اليمين */
+        .top-right-img {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 75px;
+            height: 75px;
+            border-radius: 16px;
+            border: 2px solid #6366f1;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+            object-fit: cover;
+        }
+
+        /* لوجو الكيان أعلى الشمال */
         .top-logo {
             position: absolute;
             top: 25px;
@@ -54,7 +66,7 @@
         .header {
             text-align: center;
             margin-bottom: 40px;
-            margin-top: 40px;
+            margin-top: 50px;
         }
         .badge {
             background: #1e3a8a;
@@ -335,7 +347,9 @@
 
         @media (max-width: 768px) {
             .container { padding: 15px; }
-            .top-logo { position: relative; top: 0; left: 0; display: block; margin: 0 auto 20px auto; }
+            .top-right-img { position: relative; top: 0; right: 0; display: inline-block; margin: 0 10px 20px 10px; }
+            .top-logo { position: relative; top: 0; left: 0; display: inline-block; margin: 0 10px 20px 10px; }
+            .header { margin-top: 10px; }
             .grid-3 { grid-template-columns: 1fr; gap: 15px; }
             .payment-section { grid-template-columns: 1fr; }
             .price-box { border-left: none; border-bottom: 1px solid rgba(56, 189, 248, 0.1); }
@@ -348,6 +362,9 @@
 <body>
 
     <div class="container">
+        <!-- الصورة الجديدة أعلى اليمين -->
+        <img src="https://i.postimg.cc/c4rhzWjZ/4246cff6-aa65-4efe-906b-19b94c4ec2e0.png" class="top-right-img" alt="Right AI Image">
+
         <!-- لوجو الكيان أعلى الشمال -->
         <img src="https://i.postimg.cc/W4nwLzq2/Whats-App-Image-2026-02-27-at-4-43-50-PM-(1).png" class="top-logo" alt="Logo">
 
