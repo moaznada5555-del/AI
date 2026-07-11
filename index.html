@@ -13,7 +13,6 @@
         }
         body {
             background-color: #020617;
-            /* دمج صورة الروبوت الجديدة الاحترافية في الخلفية جهة اليسار والعلوي لتصبح هي هوية التصميم البصرية */
             background-image: 
                 linear-gradient(to right, rgba(2, 6, 23, 0.3) 20%, #020617 85%),
                 url('https://i.postimg.cc/c4rhzWjZ/4246cff6-aa65-4efe-906b-19b94c4ec2e0.png');
@@ -39,7 +38,6 @@
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 40px rgba(6, 182, 212, 0.1);
         }
         
-        /* لوجو الكيان أعلى اليمين للحفاظ على التوازن الجمالي مع صورة الروبوت اللي على الشمال */
         .top-logo {
             position: absolute;
             top: 25px;
@@ -84,7 +82,6 @@
             line-height: 1.7;
         }
 
-        /* تفاصيل الموعد والمكان */
         .event-details-bar {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -112,7 +109,6 @@
             color: #38bdf8;
         }
 
-        /* ماذا ستحصل عليه */
         .section-divider {
             text-align: center;
             margin: 40px 0 25px 0;
@@ -159,7 +155,6 @@
             line-height: 1.5;
         }
 
-        /* الجزء الأوسط: الرسوم وطرق الدفع متناسق وممركز للموبيل */
         .payment-section {
             background: rgba(15, 23, 42, 0.7);
             border: 1px solid rgba(56, 189, 248, 0.2);
@@ -242,7 +237,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* بيانات التسجيل والخانات */
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -277,7 +271,6 @@
             box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
         }
 
-        /* خانة رفع الإيصال */
         .file-box {
             grid-column: span 2;
             border: 2px dashed rgba(56, 189, 248, 0.4);
@@ -302,7 +295,6 @@
             font-weight: bold;
         }
 
-        /* معلومات هامة */
         .info-box {
             border: 1px dashed #22c55e;
             background: rgba(34, 197, 94, 0.05);
@@ -327,7 +319,6 @@
             color: #4ade80;
         }
 
-        /* زرار الحجز */
         .btn-submit {
             width: 100%;
             background: linear-gradient(to right, #0284c7, #0369a1);
@@ -347,7 +338,6 @@
             box-shadow: 0 6px 30px rgba(3, 105, 161, 0.6);
         }
 
-        /* شاشة التحميل */
         .loader-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -369,7 +359,6 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         .loader-text { margin-top: 20px; color: #ffffff; font-size: 15px; }
 
-        /* ميديا كويري متكاملة ومحسنة للموبيل لضبط السنتر والتصميم الاحترافي */
         @media (max-width: 768px) {
             body {
                 background-size: 100% auto;
@@ -400,9 +389,6 @@
                 gap: 15px; 
                 text-align: center;
             }
-            .detail-item style {
-                border: none !important;
-            }
             .detail-item {
                 border-bottom: 1px solid rgba(56, 189, 248, 0.15);
                 padding-bottom: 10px;
@@ -415,7 +401,6 @@
                 grid-template-columns: 1fr; 
                 gap: 15px; 
             }
-            /* توسيط كامل وبدقة لخانة الـ 50 جنيه والدفع للموبيل */
             .payment-section { 
                 grid-template-columns: 1fr; 
             }
@@ -453,7 +438,6 @@
 <body>
 
     <div class="container">
-        <!-- لوجو الكيان أعلى اليمين -->
         <img src="https://i.postimg.cc/W4nwLzq2/Whats-App-Image-2026-02-27-at-4-43-50-PM-(1).png" class="top-logo" alt="Logo">
 
         <div class="header">
@@ -462,7 +446,6 @@
             <p class="subtitle">انضم إلينا في الفعالية الكبرى لتكتشف آفاق ومستقبل العمل والتعلم وكيفية الاستفادة القصوى من أدوات الذكاء الاصطناعي ببصمة واعية ومسؤولية.</p>
         </div>
 
-        <!-- بار تفاصيل الموعد والمكان المحدث بالكامل -->
         <div class="event-details-bar">
             <div class="detail-item">
                 <span class="label">📅 التاريخ</span>
@@ -500,7 +483,6 @@
             </div>
         </div>
 
-        <!-- قسم الدفع الممركز والمحسّن تماماً للموبيل -->
         <div class="payment-section">
             <div class="price-box">
                 <div class="price-title">رسوم المشاركة</div>
@@ -545,19 +527,12 @@
                     <label>البريد الإلكتروني</label>
                     <input type="email" id="email" placeholder="اكتب بريدك الإلكتروني" required>
                 </div>
+                <!-- تعديل المحافظة لتصبح خانة إدخال نصي حر يكتبها المسجل بنفسه -->
                 <div class="form-group">
                     <label>المحافظة</label>
-                    <select id="governorate" required>
-                        <option value="" disabled selected>اختر المحافظة</option>
-                        <option value="القاهرة">القاهرة</option>
-                        <option value="الجيزة">الجيزة</option>
-                        <option value="الإسكندرية">الإسكندرية</option>
-                        <option value="القليوبية">القليوبية</option>
-                        <option value="المنوفية">المنوفية</option>
-                        <option value="الشرقية">الشرقية</option>
-                        <option value="الغربية">الغربية</option>
-                    </select>
+                    <input type="text" id="governorate" placeholder="اكتب محافظتك" required>
                 </div>
+                <!-- تعديل السنة الدراسية لتصل حتى السنة السادسة وخريج -->
                 <div class="form-group">
                     <label>السنة الدراسية</label>
                     <select id="year" required>
@@ -566,6 +541,8 @@
                         <option value="الثانية">الثانية</option>
                         <option value="الثالثة">الثالثة</option>
                         <option value="الرابعة">الرابعة</option>
+                        <option value="الخامسة">الخامسة</option>
+                        <option value="السادسة">السادسة</option>
                         <option value="خريج">خريج</option>
                     </select>
                 </div>
@@ -597,7 +574,8 @@
     </div>
 
     <script>
-        const scriptUrl = "https://script.google.com/macros/s/AKfycbzGSBKnqERyQJNepL82x7J3Q-5Y_MUdeGuNWCE-0z4ohXKzTHzL1GvHc-QtYs8t9r-DCw/exec";
+        // سيتم ربط هذا الرابط بالنشر الجديد (Deploy) للسكريبت المعدل
+        const scriptUrl = "https://script.google.com/macros/s/AKfycbxFba8FxLXxK9YHVLlRdmARv9uUPB9T6UJGXy7o_5bHDLtBJ_CauGf3bWEewhKttNRM/exec";
         const whatsappUrl = "https://chat.whatsapp.com/LA9Fb6A3RodLp5GdwPP3Wv?s=cl&p=a&ilr=1&amv=2";
 
         function updateFileLabel() {
