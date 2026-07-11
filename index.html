@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>استمارة التسجيل</title>
+    <title>استمارة التسجيل | الوعي في عصر الذكاء الاصطناعي</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,14 +13,13 @@
         }
         body {
             background-color: #020617;
+            /* دمج صورة وجه الروبوت المتوهج الكبير في الخلفية جهة اليمين مع تصميم الـ Dark Mode */
             background-image: 
-                url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964&auto=format&fit=crop'), 
-                radial-gradient(circle at top right, rgba(30, 64, 175, 0.6), transparent 50%),
-                radial-gradient(circle at left center, rgba(6, 182, 212, 0.3), transparent 40%);
+                linear-gradient(to left, rgba(2, 6, 23, 0.4) 30%, #020617 90%),
+                url('https://images.unsplash.com/photo-1675557009875-436f09780264?q=80&w=1200&auto=format&fit=crop');
             background-size: cover;
-            background-position: center;
+            background-position: right top;
             background-attachment: fixed;
-            background-blend-mode: overlay;
             color: #ffffff;
             padding: 40px 20px;
             display: flex;
@@ -30,28 +29,16 @@
             width: 100%;
             max-width: 850px;
             position: relative;
-            background: rgba(2, 6, 23, 0.75);
-            backdrop-filter: blur(12px);
-            padding: 30px;
+            background: rgba(2, 6, 23, 0.80);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 40px 30px;
             border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
         }
         
-        /* صورة الإنسان الآلي المحدثة أعلى اليمين المتوافقة مع الموبايل والـ Theme */
-        .top-right-img {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            width: 75px;
-            height: 75px;
-            border-radius: 16px;
-            border: 2px solid #2563eb;
-            box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
-            object-fit: cover;
-        }
-
-        /* لوجو الكيان أعلى الشمال */
+        /* لوجو الكيان أعلى الشمال فقط */
         .top-logo {
             position: absolute;
             top: 25px;
@@ -61,12 +48,14 @@
             border-radius: 16px;
             border: 2px solid #06b6d4;
             box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+            z-index: 10;
         }
 
         .header {
-            text-align: center;
+            text-align: right;
             margin-bottom: 40px;
-            margin-top: 50px;
+            margin-top: 40px;
+            max-width: 80%;
         }
         .badge {
             background: #1e3a8a;
@@ -76,11 +65,11 @@
             font-size: 14px;
             font-weight: bold;
             display: inline-block;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             border: 1px solid #2563eb;
         }
         h1 {
-            font-size: 42px;
+            font-size: 44px;
             font-weight: 900;
             margin-bottom: 15px;
             background: linear-gradient(to bottom, #ffffff, #93c5fd);
@@ -90,8 +79,36 @@
         }
         .subtitle {
             color: #94a3b8;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* تفاصيل الموعد والمكان */
+        .event-details-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 45px;
+            text-align: center;
+        }
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .detail-item .label {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+        .detail-item .val {
             font-size: 15px;
-            line-height: 1.6;
+            font-weight: bold;
+            color: #38bdf8;
         }
 
         /* ماذا ستحصل عليه */
@@ -196,6 +213,15 @@
             font-size: 12px;
             color: #64748b;
             margin-bottom: 20px;
+        }
+        .pay-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            background: rgba(2, 6, 23, 0.8);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 12px 15px;
         }
         .pay-row {
             display: flex;
@@ -346,10 +372,16 @@
         .loader-text { margin-top: 20px; color: #ffffff; font-size: 15px; }
 
         @media (max-width: 768px) {
-            .container { padding: 15px; }
-            .top-right-img { position: relative; top: 0; right: 0; display: inline-block; margin: 0 10px 20px 10px; }
-            .top-logo { position: relative; top: 0; left: 0; display: inline-block; margin: 0 10px 20px 10px; }
-            .header { margin-top: 10px; }
+            body {
+                background-position: center top;
+                background-image: 
+                    linear-gradient(to bottom, rgba(2, 6, 23, 0.6) 20%, #020617 80%),
+                    url('https://images.unsplash.com/photo-1675557009875-436f09780264?q=80&w=600&auto=format&fit=crop');
+            }
+            .container { padding: 20px 15px; }
+            .top-logo { position: relative; top: 0; left: 0; display: block; margin: 0 auto 20px auto; }
+            .header { text-align: center; max-width: 100%; margin-top: 10px; }
+            .event-details-bar { grid-template-columns: 1fr; gap: 10px; }
             .grid-3 { grid-template-columns: 1fr; gap: 15px; }
             .payment-section { grid-template-columns: 1fr; }
             .price-box { border-left: none; border-bottom: 1px solid rgba(56, 189, 248, 0.1); }
@@ -362,14 +394,27 @@
 <body>
 
     <div class="container">
-        <img src="https://images.unsplash.com/photo-1675557009875-436f09780264?q=80&w=500&auto=format&fit=crop" class="top-right-img" alt="AI Face">
-
         <img src="https://i.postimg.cc/W4nwLzq2/Whats-App-Image-2026-02-27-at-4-43-50-PM-(1).png" class="top-logo" alt="Logo">
 
         <div class="header">
-            <span class="badge">استمارة التسجيل</span>
+            <span class="badge">استمارة الحجز الرسمية</span>
             <h1>الوعي في عصر الذكاء الاصطناعي</h1>
-            <p class="subtitle">انضم إلينا في فعاليات تثقيفية ملهمة<br>لاكتشاف كيف يمكننا الاستفادة من الذكاء الاصطناعي بوعي ومسؤولية</p>
+            <p class="subtitle">انضم إلينا في الفعالية الكبرى لتكتشف آفاق ومستقبل العمل والتعلم وكيفية الاستفادة القصوى من أدوات الذكاء الاصطناعي ببصمة واعية ومسؤولية.</p>
+        </div>
+
+        <div class="event-details-bar">
+            <div class="detail-item">
+                <span class="label">📅 التاريخ</span>
+                <span class="val">الخميس 30 يوليو 2026</span>
+            </div>
+            <div class="detail-item" style="border-right: 1px solid rgba(56, 189, 248, 0.15); border-left: 1px solid rgba(56, 189, 248, 0.15);">
+                <span class="label">🕒 التوقيت</span>
+                <span class="val">من الساعة 3:00 م حتى 9:00 م</span>
+            </div>
+            <div class="detail-item">
+                <span class="label">📍 المكان</span>
+                <span class="val">قاعة الندوات - مركز شباب الجزيرة</span>
+            </div>
         </div>
 
         <div class="section-divider">
@@ -380,17 +425,17 @@
             <div class="card">
                 <span class="card-icon">🎁</span>
                 <div class="card-title">هدايا وجيفتات</div>
-                <div class="card-desc">هتتوزع على المشاركين</div>
+                <div class="card-desc">توزيعات ومفاجآت حصرية للحاضرين</div>
             </div>
             <div class="card">
                 <span class="card-icon">📜</span>
                 <div class="card-title">شهادة معتمدة</div>
-                <div class="card-desc">تستلمها في نهاية الفعالية</div>
+                <div class="card-desc">شهادة حضور معتمدة من وزارة الشباب والرياضة</div>
             </div>
             <div class="card">
                 <span class="card-icon">👥</span>
                 <div class="card-title">محاضرات قيمة</div>
-                <div class="card-desc">ومحتوى هادف في عصر الذكاء الاصطناعي</div>
+                <div class="card-desc">محتوى هادف وقوي يواكب العصر الحديث</div>
             </div>
         </div>
 
@@ -399,7 +444,7 @@
                 <div class="price-title">رسوم المشاركة</div>
                 <div class="price-num">50</div>
                 <div class="price-currency">جنيه</div>
-                <div class="price-details">تشمل شهادة معتمدة + هدايا وجيفتات</div>
+                <div class="price-details">تشمل الشهادة المعتمدة من الوزارة + الجيفتات</div>
             </div>
             <div class="methods-box">
                 <div class="methods-title">طرق الدفع</div>
@@ -474,9 +519,9 @@
 
             <div class="info-box">
                 <ul>
-                    <li>بعد إتمام عملية التسجيل والدفع، سيتم إرسال رسالة تأكيد على بريدك الإلكتروني.</li>
-                    <li>تتضمن تفاصيل الفعالية ( اليوم - التاريخ - المكان - الوقت ).</li>
-                    <li>يرجى التأكد من صحة البيانات المدخلة.</li>
+                    <li>بعد إتمام عملية التسجيل والدفع، سيتم إرسال رسالة تأكيد مباشرة وفورية على بريدك الإلكتروني.</li>
+                    <li>الشهادة المسلمة في نهاية الإيفنت معتمدة رسمياً من وزارة الشباب والرياضة.</li>
+                    <li>يرجى التأكد من صحة البيانات المدخلة وخاصة البريد الإلكتروني لمتابعة التحديثات.</li>
                 </ul>
             </div>
 
