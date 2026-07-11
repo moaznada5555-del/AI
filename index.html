@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استمارة التسجيل - الوعي في عصر الذكاء الاصطناعي</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #030712;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(43, 86, 255, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(19, 203, 215, 0.1) 0px, transparent 50%);
+            color: #f3f4f6;
+            margin: 0;
+            padding: 20px 10px;
+            min-height: 100vh;
+            display: block;
+        }
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Header */
+        .header-section {
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+            padding-top: 20px;
+        }
+        .logo-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 15px rgba(43, 86, 255, 0.2);
+            overflow: hidden;
+            background: #fff;
+        }
+        .logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(43, 86, 255, 0.2);
+            color: #58a6ff;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            border: 1px solid rgba(43, 86, 255, 0.3);
+        }
+        h1 {
+            font-size: 26px;
+            margin: 0 0 10px 0;
+            background: linear-gradient(135deg, #fff 40%, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+        .subtitle {
+            color: #9ca3af;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Section Divider */
+        .section-title {
+            display: block;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: #38bdf8;
+            margin: 30px 0 20px 0;
+            position: relative;
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #d1d5db;
+            margin-bottom: 8px;
+        }
+        input[type="text"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(31, 41, 55, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.25s ease;
+            text-align: right;
+        }
+        input:focus, select:focus {
+            border-color: #2b56ff;
+            box-shadow: 0 0 10px rgba(43, 86, 255, 0.2);
+            background: rgba(31, 41, 55, 0.9);
+        }
+
+        /* Payment Row */
+        .payment-box {
+            background: rgba(43, 86, 255, 0.05);
+            border: 1px dashed rgba(43, 86, 255, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .price-tag {
+            font-size: 32px;
+            font-weight: 800;
+            color: #38bdf8;
+            margin-bottom: 5px;
+        }
+        .price-desc {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-bottom: 15px;
+        }
+        .payment-methods {
+            display: block;
+            text-align: right;
+            background: rgba(0,0,0,0.2);
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* Upload Button */
+        .file-upload-wrapper {
+            position: relative;
+            margin-top: 15px;
+        }
+        .file-upload-btn {
+            display: block;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            color: #9ca3af;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+        .file-upload-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #38bdf8;
+            color: #fff;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .file-name-preview {
+            font-size: 12px;
+            color: #10b981;
+            margin-top: 5px;
+            text-align: center;
+            display: none;
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #2b56ff, #13cbd7);
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(43, 86, 255, 0.3);
+            transition: all 0.25s ease;
+            margin-top: 20px;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(43, 86, 255, 0.45);
+        }
+        .btn-submit:disabled {
+            background: #4b5563;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Instructions Info */
+        .info-box {
+            background: rgba(245, 158, 11, 0.06);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 25px;
+            font-size: 12px;
+            color: #fbbf24;
+            line-height: 1.6;
+            text-align: right;
+        }
+
+        /* Loading Overlay */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(3, 7, 18, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255,255,255,0.1);
+            border-top-color: #2b56ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .overlay p { margin-top: 20px; font-size: 16px; color: #fff; }
+
+        @media (max-width: 550px) {
+            .header-section { padding-top: 90px; }
+            .logo-box { left: 50%; transform: translateX(-50%); top: 0; width: 80px; height: 80px; }
+            .container { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header-section">
+            <div class="logo-box">
+                <img src="https://i.postimg.cc/W4nwLzq2/Whats-App-Image-2026-02-27-at-4-43-50-PM-(1).png" alt="لوجو الكيان">
+            </div>
+            <span class="badge">استمارة التسجيل</span>
+            <h1>الوعي في عصر الذكاء الاصطناعي</h1>
+            <p class="subtitle">انضم إلينا في فعاليات تثقيفية ملهمة لاكتشاف كيف يمكننا الاستفادة من الذكاء الاصطناعي بوعي ومسؤولية.</p>
+        </div>
+
+        <form id="registrationForm">
+            
+            <span class="section-title">بيانات التسجيل</span>
+
+            <div class="form-group">
+                <label>الاسم رباعي (باللغة العربية) *</label>
+                <input type="text" id="fullName" placeholder="اكتب اسمك رباعي" required>
+            </div>
+
+            <div class="form-group">
+                <label>رقم الهاتف (واتساب) *</label>
+                <input type="text" id="phoneNumber" placeholder="اكتب رقم الهاتف" required>
+            </div>
+
+            <div class="form-group">
+                <label>البريد الإلكتروني *</label>
+                <input type="email" id="email" placeholder="اكتب بريدك الإلكتروني" required>
+            </div>
+
+            <div class="form-group">
+                <label>الرقم القومي *</label>
+                <input type="text" id="nationalId" placeholder="اكتب الرقم القومي المكون من 14 رقم" required>
+            </div>
+
+            <div class="form-group">
+                <label>المحافظة *</label>
+                <select id="governorate" required>
+                    <option value="" disabled selected>اختر المحافظة</option>
+                    <option value="القاهرة">القاهرة</option>
+                    <option value="الجيزة">الجيزة</option>
+                    <option value="الإسكندرية">الإسكندرية</option>
+                    <option value="القليوبية">القليوبية</option>
+                    <option value="الشرقية">الشرقية</option>
+                    <option value="المنوفية">المنوفية</option>
+                    <option value="الغربية">الغربية</option>
+                    <option value="الدقهلية">الدقهلية</option>
+                    <option value="البحيرة">البحيرة</option>
+                    <option value="دمياط">دمياط</option>
+                    <option value="بورسعيد">بورسعيد</option>
+                    <option value="الإسماعيلية">الإسماعيلية</option>
+                    <option value="السويس">السويس</option>
+                    <option value="كفر الشيخ">كفر الشيخ</option>
+                    <option value="الفيوم">الفيوم</option>
+                    <option value="بني سويف">بني سويف</option>
+                    <option value="المنيا">المنيا</option>
+                    <option value="أسيوط">أسيوط</option>
+                    <option value="سوهاج">سوهاج</option>
+                    <option value="قنا">قنا</option>
+                    <option value="الأقصر">الأقصر</option>
+                    <option value="أسوان">أسوان</option>
+                    <option value="مطروح">مطروح</option>
+                    <option value="الوادي الجديد">الوادي الجديد</option>
+                    <option value="البحر الأحمر">البحر الأحمر</option>
+                    <option value="شمال سيناء">شمال سيناء</option>
+                    <option value="جنوب سيناء">جنوب سيناء</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>السنة الدراسية *</label>
+                <select id="academicYear" required>
+                    <option value="" disabled selected>اختر السنة الدراسية</option>
+                    <option value="الأولى">الأولى</option>
+                    <option value="الثانية">الثانية</option>
+                    <option value="الثالثة">الثالثة</option>
+                    <option value="الرابعة">الرابعة</option>
+                    <option value="خريج">خريج</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>كلية إيه؟ *</label>
+                <input type="text" id="college" placeholder="اكتب اسم الكلية" required>
+            </div>
+
+            <span class="section-title">رسوم المشاركة وطرق الدفع</span>
+
+            <div class="payment-box">
+                <div class="price-tag">50 جنيه</div>
+                <div class="price-desc">تشمل شهادة معتمدة + هدايا وجيفتات</div>
+                <div class="payment-methods">
+                    📱 <strong>فودافون كاش:</strong> 010XXXXXXXX<br>
+                    💳 <strong>انستا باي:</strong> username@instapay
+                </div>
+                
+                <div class="file-upload-wrapper">
+                    <label class="file-upload-btn" for="receiptFile" id="uploadLabel">
+                        📸 ارفق صورة إيصال التحويل (سكرين شوت) *
+                    </label>
+                    <input type="file" id="receiptFile" accept="image/*" required>
+                    <div class="file-name-preview" id="fileNamePreview">تم اختيار ملف بنجاح</div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">تسجيل وتأكيد الحجز</button>
+        </form>
+
+        <div class="info-box">
+            • بعد إتمام التسجيل وإرسال البيانات، سيتم إرسال رسالة تأكيد فورا على بريدك الإلكتروني تحتوي على كافة التفاصيل.<br>
+            • سيتم توجيهك مباشرة لجروب الواتساب الرسمي لمتابعة التعليمات الختامية للحضور.
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p id="loadingText">جاري رفع الإيصال وتسجيل بياناتك... يرجى الانتظار</p>
+    </div>
+
+    <script>
+        // الروابط والتوجيهات
+        const scriptUrl = "https://script.google.com/macros/s/AKfycbzGSBKnqERyQJNepL82x7J3Q-5Y_MUdeGuNWCE-0z4ohXKzTHzL1GvHc-QtYs8t9r-DCw/exec";
+        const whatsappGroupUrl = "https://chat.whatsapp.com/LA9Fb6A3RodLp5GdwPP3Wv?s=cl&p=a&ilr=1&amv=2";
+
+        const fileInput = document.getElementById('receiptFile');
+        const uploadLabel = document.getElementById('uploadLabel');
+        const filePreview = document.getElementById('fileNamePreview');
+        const form = document.getElementById('registrationForm');
+        const overlay = document.getElementById('loadingOverlay');
+
+        // عرض اسم الملف عند الاختيار
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                uploadLabel.style.borderColor = '#10b981';
+                uploadLabel.style.color = '#10b981';
+                filePreview.innerText = "📁 تم اختيار الإيصال: " + this.files[0].name;
+                filePreview.style.display = 'block';
+            }
+        });
+
+        // إرسال النموذج
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            overlay.style.display = 'flex';
+            document.getElementById('submitBtn').disabled = true;
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const base64Data = event.target.result.split(',')[1];
+                const contentType = file.type;
+
+                const formData = {
+                    fullName: document.getElementById('fullName').value,
+                    phoneNumber: document.getElementById('phoneNumber').value,
+                    email: document.getElementById('email').value,
+                    nationalId: document.getElementById('nationalId').value,
+                    governorate: document.getElementById('governorate').value,
+                    academicYear: document.getElementById('academicYear').value,
+                    college: document.getElementById('college').value,
+                    receiptData: base64Data,
+                    receiptType: contentType
+                };
+
+                fetch(scriptUrl, {
+                    method: 'POST',
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status === 'success') {
+                        document.getElementById('loadingText').innerText = "🎉 تم التسجيل بنجاح! جاري تحويلك لجروب الواتساب...";
+                        setTimeout(() => {
+                            window.location.href = whatsappGroupUrl;
+                        }, 1500);
+                    } else {
+                        alert("حدث خطأ أثناء التسجيل: " + result.message);
+                        overlay.style.display = 'none';
+                        document.getElementById('submitBtn').disabled = false;
+                    }
+                })
+                .catch(error => {
+                    alert("عذراً، حدث خطأ في الاتصال بالخادم. حاول مرة أخرى.");
+                    overlay.style.display = 'none';
+                    document.getElementById('submitBtn').disabled = false;
+                });
+            };
+
+            reader.readAsDataURL(file);
+        });
+    </script>
+</body>
+</html>
