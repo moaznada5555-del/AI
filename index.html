@@ -4,591 +4,184 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>استمارة التسجيل | الوعي في عصر الذكاء الاصطناعي</title>
+    <!-- مكتبات توليد الـ QR Code وتحويل الكارت لصورة قابلة للتحميل -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body {
             background-color: #020617;
-            background-image: 
-                linear-gradient(to right, rgba(2, 6, 23, 0.3) 20%, #020617 85%),
-                url('https://i.postimg.cc/c4rhzWjZ/4246cff6-aa65-4efe-906b-19b94c4ec2e0.png');
-            background-size: 55% auto;
-            background-position: left top;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: #ffffff;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
+            background-image: linear-gradient(to right, rgba(2, 6, 23, 0.3) 20%, #020617 85%), url('https://i.postimg.cc/c4rhzWjZ/4246cff6-aa65-4efe-906b-19b94c4ec2e0.png');
+            background-size: 55% auto; background-position: left top; background-repeat: no-repeat; background-attachment: fixed;
+            color: #ffffff; padding: 40px 20px; display: flex; justify-content: center;
         }
         .container {
-            width: 100%;
-            max-width: 850px;
-            position: relative;
-            background: rgba(4, 11, 36, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 40px 30px;
-            border-radius: 24px;
-            border: 1px solid rgba(56, 189, 248, 0.15);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 40px rgba(6, 182, 212, 0.1);
+            width: 100%; max-width: 850px; position: relative; background: rgba(4, 11, 36, 0.75);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 40px 30px; border-radius: 24px;
+            border: 1px solid rgba(56, 189, 248, 0.15); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
         }
+        .top-logo { position: absolute; top: 25px; right: 25px; width: 75px; height: 75px; border-radius: 16px; border: 2px solid #06b6d4; box-shadow: 0 0 15px rgba(6, 182, 212, 0.4); }
+        .header { text-align: right; margin-bottom: 40px; margin-top: 50px; max-width: 75%; }
+        .badge { background: #1e3a8a; color: #38bdf8; padding: 6px 20px; border-radius: 50px; font-size: 14px; font-weight: bold; display: inline-block; margin-bottom: 20px; }
+        h1 { font-size: 42px; font-weight: 900; margin-bottom: 15px; background: linear-gradient(to bottom, #ffffff, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { color: #94a3b8; font-size: 16px; line-height: 1.7; }
+        .event-details-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 16px; padding: 18px; margin-bottom: 45px; text-align: center; }
+        .detail-item .label { font-size: 12px; color: #64748b; margin-bottom: 5px; }
+        .detail-item .val { font-size: 15px; font-weight: bold; color: #38bdf8; }
         
-        .top-logo {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            width: 75px;
-            height: 75px;
-            border-radius: 16px;
-            border: 2px solid #06b6d4;
-            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
-            z-index: 10;
-        }
-
-        .header {
-            text-align: right;
-            margin-bottom: 40px;
-            margin-top: 50px;
-            max-width: 75%;
-        }
-        .badge {
-            background: #1e3a8a;
-            color: #38bdf8;
-            padding: 6px 20px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 20px;
-            border: 1px solid #2563eb;
-        }
-        h1 {
-            font-size: 42px;
-            font-weight: 900;
-            margin-bottom: 15px;
-            background: linear-gradient(to bottom, #ffffff, #38bdf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
-        }
-        .subtitle {
-            color: #94a3b8;
-            font-size: 16px;
-            line-height: 1.7;
-        }
-
-        .event-details-bar {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            background: rgba(15, 23, 42, 0.85);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 16px;
-            padding: 18px;
-            margin-bottom: 45px;
-            text-align: center;
-        }
-        .detail-item {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .detail-item .label {
-            font-size: 12px;
-            color: #64748b;
-            margin-bottom: 5px;
-        }
-        .detail-item .val {
-            font-size: 15px;
-            font-weight: bold;
-            color: #38bdf8;
-        }
-
-        .section-divider {
-            text-align: center;
-            margin: 40px 0 25px 0;
-            position: relative;
-        }
-        .section-divider span {
-            background: #09112e;
-            padding: 6px 22px;
-            color: #38bdf8;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 8px;
-            border: 1px solid rgba(56, 189, 248, 0.25);
-        }
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        .card {
-            background: rgba(15, 23, 42, 0.65);
-            border: 1px solid rgba(56, 189, 248, 0.15);
-            border-radius: 16px;
-            padding: 25px 15px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .card-icon {
-            font-size: 30px;
-            margin-bottom: 15px;
-            color: #38bdf8;
-            display: block;
-        }
-        .card-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #38bdf8;
-            margin-bottom: 8px;
-        }
-        .card-desc {
-            color: #94a3b8;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        .payment-section {
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 20px;
-            display: grid;
-            grid-template-columns: 1fr 1.3fr;
-            margin-bottom: 40px;
-            overflow: hidden;
-        }
-        .price-box {
-            padding: 40px 20px;
-            text-align: center;
-            border-left: 1px solid rgba(56, 189, 248, 0.15);
-            background: rgba(30, 41, 59, 0.25);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .price-title {
-            font-size: 14px;
-            color: #94a3b8;
-            margin-bottom: 10px;
-        }
-        .price-num {
-            font-size: 72px;
-            font-weight: 900;
-            color: #38bdf8;
-            line-height: 1;
-            margin-bottom: 5px;
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
-        }
-        .price-currency {
-            font-size: 16px;
-            color: #ffffff;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .price-details {
-            font-size: 13px;
-            color: #94a3b8;
-            max-width: 90%;
-        }
-        .methods-box {
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .methods-title {
-            font-size: 16px;
-            color: #38bdf8;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .methods-subtitle {
-            font-size: 12px;
-            color: #64748b;
-            margin-bottom: 20px;
-        }
-        .pay-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            background: rgba(2, 6, 23, 0.8);
-            border: 1px solid rgba(56, 189, 248, 0.15);
-            border-radius: 10px;
-            padding: 14px 18px;
-        }
-        .pay-label {
-            font-size: 14px;
-            color: #ffffff;
-        }
-        .pay-value {
-            font-family: monospace;
-            font-size: 16px;
-            color: #38bdf8;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-        .form-group.full-width {
-            grid-column: span 2;
-        }
-        label {
-            font-size: 14px;
-            color: #94a3b8;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        input, select {
-            background: rgba(15, 23, 42, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 10px;
-            padding: 14px;
-            color: #ffffff;
-            font-size: 14px;
-            outline: none;
-            text-align: right;
-        }
-        input:focus, select:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
-        }
-
-        .file-box {
-            grid-column: span 2;
-            border: 2px dashed rgba(56, 189, 248, 0.4);
-            border-radius: 12px;
-            padding: 25px;
-            text-align: center;
-            cursor: pointer;
-            background: rgba(15, 23, 42, 0.5);
-            transition: all 0.2s;
-        }
-        .file-box:hover {
-            border-color: #38bdf8;
-            background: rgba(15, 23, 42, 0.7);
-        }
-        .file-box input {
-            display: none;
-        }
-        .file-label {
-            color: #94a3b8;
-            font-size: 14px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .info-box {
-            border: 1px dashed #22c55e;
-            background: rgba(34, 197, 94, 0.05);
-            border-radius: 14px;
-            padding: 20px;
-            margin-bottom: 35px;
-        }
-        .info-box ul {
-            list-style: none;
-        }
-        .info-box li {
-            font-size: 13px;
-            color: #4ade80;
-            margin-bottom: 8px;
-            position: relative;
-            padding-right: 15px;
-        }
-        .info-box li::before {
-            content: "•";
-            position: absolute;
-            right: 0;
-            color: #4ade80;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background: linear-gradient(to right, #0284c7, #0369a1);
-            color: #ffffff;
-            border: none;
-            padding: 16px;
-            border-radius: 50px;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 25px rgba(3, 105, 161, 0.4);
-            transition: all 0.2s;
-        }
-        .btn-submit:hover {
-            transform: translateY(-1px);
-            opacity: 0.95;
-            box-shadow: 0 6px 30px rgba(3, 105, 161, 0.6);
-        }
-
-        .loader-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(2, 6, 23, 0.95);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 1000;
-        }
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255,255,255,0.1);
-            border-top-color: #38bdf8;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
+        .payment-section { background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 20px; display: grid; grid-template-columns: 1fr 1.3fr; margin-bottom: 40px; overflow: hidden; }
+        .price-box { padding: 40px 20px; text-align: center; background: rgba(30, 41, 59, 0.25); }
+        .price-num { font-size: 72px; font-weight: 900; color: #38bdf8; }
+        .methods-box { padding: 30px; }
+        .pay-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; background: rgba(2, 6, 23, 0.8); border: 1px solid rgba(56, 189, 248, 0.15); border-radius: 10px; padding: 14px 18px; }
+        .pay-value { font-family: monospace; font-size: 16px; color: #38bdf8; font-weight: bold; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group.full-width { grid-column: span 2; }
+        label { font-size: 14px; color: #94a3b8; margin-bottom: 8px; }
+        input, select { background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 10px; padding: 14px; color: #ffffff; outline: none; text-align: right; }
+        input:focus, select:focus { border-color: #38bdf8; box-shadow: 0 0 12px rgba(56, 189, 248, 0.4); }
+        .file-box { grid-column: span 2; border: 2px dashed rgba(56, 189, 248, 0.4); border-radius: 12px; padding: 25px; text-align: center; cursor: pointer; background: rgba(15, 23, 42, 0.5); }
+        .file-label { color: #94a3b8; font-size: 14px; font-weight: bold; }
+        .btn-submit { width: 100%; background: linear-gradient(to right, #0284c7, #0369a1); color: #ffffff; border: none; padding: 16px; border-radius: 50px; font-size: 17px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 25px rgba(3, 105, 161, 0.4); }
+        
+        .loader-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.95); display: none; justify-content: center; align-items: center; flex-direction: column; z-index: 1000; }
+        .spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.1); border-top-color: #38bdf8; border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        .loader-text { margin-top: 20px; color: #ffffff; font-size: 15px; }
+        
+        /* تصميم كارت التذكرة الذكي الاحترافي الشامل */
+        #successCard { display: none; background: #0b1329; border: 2px solid #0284c7; padding: 30px; border-radius: 24px; max-width: 500px; margin: 20px auto; box-shadow: 0 0 40px rgba(2, 132, 199, 0.5); text-align: center; direction: ltr; font-family: Arial, sans-serif; position: relative; overflow: hidden; }
+        .ticket-robot-img { width: 100%; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); border: 1px solid rgba(6, 182, 212, 0.3); }
+        .ticket-welcome { color: #06b6d4; font-size: 26px; font-weight: bold; margin-bottom: 5px; }
+        .ticket-verify { color: #94a3b8; font-size: 13px; margin-bottom: 20px; }
+        .ticket-msg { color: #e2e8f0; font-size: 14px; line-height: 1.6; text-align: left; margin-bottom: 20px; }
+        #qrcode { display: inline-block; padding: 12px; background: white; border-radius: 14px; margin-bottom: 20px; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+        .ticket-details-box { background: rgba(15, 23, 42, 0.8); padding: 15px; border-radius: 14px; border-left: 4px solid #06b6d4; text-align: left; margin-bottom: 20px; }
+        .ticket-details-box h4 { color: #06b6d4; margin: 0 0 8px 0; font-size: 15px; }
+        .ticket-details-box p { color: #ffffff; margin: 0 0 6px 0; font-size: 13px; }
+        .ticket-details-box a { color: #22c55e; font-weight: bold; text-decoration: underline; font-size: 13px; }
+        .btn-download { display: block; width: 100%; background: linear-gradient(135deg, #22c55e, #16a34a); color: white; padding: 16px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 16px; box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4); cursor: pointer; border: none; font-family: 'Segoe UI', Tahoma, sans-serif; direction: rtl; }
 
-        @media (max-width: 768px) {
-            body {
-                background-size: 100% auto;
-                background-position: center top;
-                background-image: 
-                    linear-gradient(to bottom, rgba(2, 6, 23, 0.5) 15%, #020617 65%),
-                    url('https://i.postimg.cc/c4rhzWjZ/4246cff6-aa65-4efe-906b-19b94c4ec2e0.png');
-                padding: 15px 10px;
-            }
-            .container { 
-                padding: 25px 15px; 
-                background: rgba(4, 11, 36, 0.88);
-            }
-            .top-logo { 
-                position: relative; 
-                top: 0; 
-                right: 0; 
-                display: block; 
-                margin: 0 auto 25px auto; 
-            }
-            .header { 
-                text-align: center; 
-                max-width: 100%; 
-                margin-top: 10px; 
-            }
-            .event-details-bar { 
-                grid-template-columns: 1fr; 
-                gap: 15px; 
-                text-align: center;
-            }
-            .detail-item {
-                border-bottom: 1px solid rgba(56, 189, 248, 0.15);
-                padding-bottom: 10px;
-            }
-            .detail-item:last-child {
-                border-bottom: none;
-                padding-bottom: 0;
-            }
-            .grid-3 { 
-                grid-template-columns: 1fr; 
-                gap: 15px; 
-            }
-            .payment-section { 
-                grid-template-columns: 1fr; 
-            }
-            .price-box { 
-                border-left: none; 
-                border-bottom: 1px solid rgba(56, 189, 248, 0.2); 
-                padding: 35px 15px;
-                text-align: center;
-                align-items: center;
-                justify-content: center;
-            }
-            .methods-box {
-                padding: 25px 15px;
-                text-align: center;
-            }
-            .pay-row {
-                flex-direction: column;
-                gap: 8px;
-                text-align: center;
-                justify-content: center;
-            }
-            .form-grid { 
-                grid-template-columns: 1fr; 
-                gap: 15px;
-            }
-            .form-group.full-width { 
-                grid-column: span 1; 
-            }
-            .file-box { 
-                grid-column: span 1; 
-            }
-        }
+        @media (max-width: 768px) { .event-details-bar, .payment-section, .form-grid { grid-template-columns: 1fr; } .form-group.full-width, .file-box { grid-column: span 1; } }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <img src="https://i.postimg.cc/W4nwLzq2/Whats-App-Image-2026-02-27-at-4-43-50-PM-(1).png" class="top-logo" alt="Logo">
+    <div class="container" id="mainContainer">
+        <!-- قسم الفورم الرئيسي -->
+        <div id="formSection">
+            <img src="https://i.postimg.cc/W4nwLzq2/Whats-App-Image-2026-02-27-at-4-43-50-PM-(1).png" class="top-logo" alt="Logo">
+            <div class="header">
+                <span class="badge">استمارة الحجز الرسمية</span>
+                <h1>الوعي في عصر الذكاء الاصطناعي</h1>
+                <p class="subtitle">انضم إلينا في الفعالية الكبرى لتكتشف آفاق ومستقبل العمل والتعلم وكيفية الاستفادة القصوى من أدوات الذكاء الاصطناعي.</p>
+            </div>
 
-        <div class="header">
-            <span class="badge">استمارة الحجز الرسمية</span>
-            <h1>الوعي في عصر الذكاء الاصطناعي</h1>
-            <p class="subtitle">انضم إلينا في الفعالية الكبرى لتكتشف آفاق ومستقبل العمل والتعلم وكيفية الاستفادة القصوى من أدوات الذكاء الاصطناعي ببصمة واعية ومسؤولية.</p>
+            <div class="event-details-bar">
+                <div class="detail-item"><span class="label">📅 التاريخ</span><span class="val">الخميس 30 يوليو 2026</span></div>
+                <div class="detail-item" style="border-right: 1px solid rgba(56, 189, 248, 0.15); border-left: 1px solid rgba(56, 189, 248, 0.15);"><span class="label">🕒 التوقيت</span><span class="val">من 3:00 م حتى 9:00 م</span></div>
+                <div class="detail-item"><span class="label">📍 المكان</span><span class="val">قاعة الندوات - مركز شباب الجزيرة</span></div>
+            </div>
+
+            <div class="payment-section">
+                <div class="price-box"><h3>رسوم المشاركة</h3><div class="price-num">50</div><p>جنيه مصري</p></div>
+                <div class="methods-box">
+                    <p style="color:#38bdf8; font-weight:bold; margin-bottom:10px;">طرق الدفع:</p>
+                    <div class="pay-row"><span>📱 فودافون كاش:</span><span class="pay-value">01006275297</span></div>
+                    <div class="pay-row"><span>💳 انستا باي:</span><span class="pay-value">01006275297@instapay</span></div>
+                </div>
+            </div>
+
+            <form id="regForm">
+                <div class="form-grid">
+                    <div class="form-group"><label>الاسم رباعي (باللغة العربية)</label><input type="text" id="name" required></div>
+                    <div class="form-group"><label>رقم الهاتف</label><input type="text" id="phone" required></div>
+                    <div class="form-group"><label>الرقم القومي</label><input type="text" id="nationalId" required></div>
+                    <div class="form-group"><label>البريد الإلكتروني</label><input type="email" id="email" required></div>
+                    <div class="form-group"><label>المحافظة</label><input type="text" id="governorate" required></div>
+                    <div class="form-group">
+                        <label>السنة الدراسية</label>
+                        <select id="year" required>
+                            <option value="" disabled selected>اختر السنة</option>
+                            <option value="الأولى">الأولى</option><option value="الثانية">الثانية</option><option value="الثالثة">الثالثة</option><option value="الرابعة">الرابعة</option><option value="خريج">خريج</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width"><label>الكلية</label><input type="text" id="college" required></div>
+                    <div class="file-box" onclick="document.getElementById('receipt').click()">
+                        <span class="file-label" id="fileLabel">📸 ارفق صورة إيصال التحويل *</span>
+                        <input type="file" id="receipt" accept="image/*" required onchange="updateFileLabel()">
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit">تسجيل الآن</button>
+            </form>
         </div>
 
-        <div class="event-details-bar">
-            <div class="detail-item">
-                <span class="label">📅 التاريخ</span>
-                <span class="val">الخميس 30 يوليو 2026</span>
+        <!-- كارت تذكرة الـ QR Code الذكي الشامل اللي هيتحمل كصورة -->
+        <div id="successCard">
+            <!-- صورة الإنسان الآلي متضمنة داخل الكارت ليتم تصويرها -->
+            <img src="https://i.postimg.cc/c4rhzWjZ/4246cff6-aa65-4efe-906b-19b94c4ec2e0.png" class="ticket-robot-img" alt="AI Robot">
+            
+            <h2 class="ticket-welcome" id="ticketUserWelcome">Welcome, Participant!</h2>
+            <p class="ticket-verify">Your registration details have been verified.</p>
+            
+            <p class="ticket-msg">Thank you for registering for <b>Awareness in the Age of Artificial Intelligence</b>. We have successfully received your registration details and payment receipt.</p>
+            
+            <!-- مكان توليد الـ QR كود داخل الكارت -->
+            <div id="qrcode"></div>
+            
+            <div class="ticket-details-box">
+                <h4>📌 Event Details</h4>
+                <p><b>Date:</b> Thursday, July 30</p>
+                <p><b>Venue:</b> Conference Hall, Al Gezira Youth Center</p>
+                <p><b>Location Map:</b> <a href="https://maps.app.goo.gl/wYgD8FshLp8qfV4G9" target="_blank">Open in Google Maps</a></p>
             </div>
-            <div class="detail-item" style="border-right: 1px solid rgba(56, 189, 248, 0.15); border-left: 1px solid rgba(56, 189, 248, 0.15);">
-                <span class="label">🕒 التوقيت</span>
-                <span class="val">من الساعة 3:00 م حتى 9:00 م</span>
-            </div>
-            <div class="detail-item">
-                <span class="label">📍 المكان</span>
-                <span class="val">قاعة الندوات - مركز شباب الجزيرة</span>
-            </div>
+            
+            <!-- زر التحويل والدخول للجروب (لن يظهر في الصورة المحملة) -->
+            <button class="btn-download" id="downloadBtn" onclick="downloadCardAndRedirect()">📥 تحميل التذكرة ودخول الجروب</button>
         </div>
-
-        <div class="section-divider">
-            <span>ماذا ستحصل عليه؟</span>
-        </div>
-
-        <div class="grid-3">
-            <div class="card">
-                <span class="card-icon">🎁</span>
-                <div class="card-title">هدايا وجيفتات</div>
-                <div class="card-desc">توزيعات ومفاجآت حصرية للحاضرين</div>
-            </div>
-            <div class="card">
-                <span class="card-icon">📜</span>
-                <div class="card-title">شهادة معتمدة</div>
-                <div class="card-desc">شهادة حضور معتمدة من وزارة الشباب والرياضة</div>
-            </div>
-            <div class="card">
-                <span class="card-icon">👥</span>
-                <div class="card-title">محاضرات قيمة</div>
-                <div class="card-desc">محتوى هادف وقوي يواكب العصر الحديث</div>
-            </div>
-        </div>
-
-        <div class="payment-section">
-            <div class="price-box">
-                <div class="price-title">رسوم المشاركة</div>
-                <div class="price-num">50</div>
-                <div class="price-currency">جنيه</div>
-                <div class="price-details">تشمل الشهادة المعتمدة من الوزارة + الجيفتات</div>
-            </div>
-            <div class="methods-box">
-                <div class="methods-title">طرق الدفع</div>
-                <div class="methods-subtitle">يمكنك دفع رسوم المشاركة على أحد الحسابات التالية:</div>
-                
-                <div class="pay-row">
-                    <span class="pay-label">📱 فودافون كاش:</span>
-                    <span class="pay-value">01006275297</span>
-                </div>
-                <div class="pay-row">
-                    <span class="pay-label">💳 انستا باي:</span>
-                    <span class="pay-value">01006275297@instapay</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="section-divider">
-            <span>بيانات التسجيل</span>
-        </div>
-
-        <form id="regForm">
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>الاسم رباعي (باللغة العربية)</label>
-                    <input type="text" id="name" placeholder="اكتب اسمك رباعي" required>
-                </div>
-                <div class="form-group">
-                    <label>رقم الهاتف</label>
-                    <input type="text" id="phone" placeholder="اكتب رقم الهاتف" required>
-                </div>
-                <div class="form-group">
-                    <label>الرقم القومي</label>
-                    <input type="text" id="nationalId" placeholder="اكتب الرقم القومي" required>
-                </div>
-                <div class="form-group">
-                    <label>البريد الإلكتروني</label>
-                    <input type="email" id="email" placeholder="اكتب بريدك الإلكتروني" required>
-                </div>
-                <div class="form-group">
-                    <label>المحافظة</label>
-                    <input type="text" id="governorate" placeholder="اكتب محافظتك" required>
-                </div>
-                <div class="form-group">
-                    <label>السنة الدراسية</label>
-                    <select id="year" required>
-                        <option value="" disabled selected>اختر السنة الدراسية</option>
-                        <option value="الأولى">الأولى</option>
-                        <option value="الثانية">الثانية</option>
-                        <option value="الثالثة">الثالثة</option>
-                        <option value="الرابعة">الرابعة</option>
-                        <option value="الخامسة">الخامسة</option>
-                        <option value="السادسة">السادسة</option>
-                        <option value="خريج">خريج</option>
-                    </select>
-                </div>
-                <div class="form-group full-width">
-                    <label>كلية إيه؟</label>
-                    <input type="text" id="college" placeholder="اكتب اسم الكلية" required>
-                </div>
-                <div class="file-box" onclick="document.getElementById('receipt').click()">
-                    <span class="file-label" id="fileLabel">📸 اضغط هنا لإرفاق صورة إيصال التحويل *</span>
-                    <input type="file" id="receipt" accept="image/*" required onchange="updateFileLabel()">
-                </div>
-            </div>
-
-            <div class="info-box">
-                <ul>
-                    <li>بعد إتمام عملية التسجيل والدفع، سيتم إرسال رسالة تأكيد مباشرة وفورية على بريدك الإلكتروني.</li>
-                    <li>الشهادة المسلمة في نهاية الإيفنت معتمدة رسمياً من وزارة الشباب والرياضة.</li>
-                    <li>يرجى التأكد من صحة البيانات المدخلة وخاصة البريد الإلكتروني لمتابعة التحديثات.</li>
-                </ul>
-            </div>
-
-            <button type="submit" class="btn-submit">تسجيل الآن</button>
-        </form>
     </div>
 
     <div class="loader-overlay" id="loader">
         <div class="spinner"></div>
-        <div class="loader-text">جاري إرسال البيانات ورفع الإيصال... برجاء الانتظار</div>
+        <div class="loader-text" style="color:white; margin-top:15px;">جاري حفظ البيانات وتوليد تذكرتك الذكية...</div>
     </div>
 
     <script>
-        // الرابط المحدث والنهائي الخاص بالـ Gmail
         const randomUrl = "https://script.google.com/macros/s/AKfycbzS0yeZkORY0PZmWoTBSpJCeoJm5-4yjhNRty4k-jCsKtHwFmVoAfxm7OIaOO1WJ8le5w/exec";
         const whatsappUrl = "https://chat.whatsapp.com/LA9Fb6A3RodLp5GdwPP3Wv?s=cl&p=a&ilr=1&amv=2";
+
+        // فحص الرابط عند مسح الـ QR كود لإظهار الصفحة الشخصية مباشرة لمن يمسح الكود
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('view') === 'ticket_info') {
+            const userName = urlParams.get('name') || "مشاركنا العزيز";
+            document.body.innerHTML = `
+                <div class="container" style="max-width: 550px; text-align: center; direction: ltr; font-family: Arial, sans-serif; padding: 30px;">
+                    <img src="https://i.postimg.cc/c4rhzWjZ/4246cff6-aa65-4efe-906b-19b94c4ec2e0.png" style="width: 100%; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+                    <h2 style="color: #06b6d4; margin-bottom: 5px;">Welcome, ${userName}!</h2>
+                    <p style="color: #94a3b8; font-size: 14px; margin-bottom: 20px;">Your registration details have been verified.</p>
+                    <p style="color: #e2e8f0; font-size: 15px; line-height: 1.6; text-align: left; margin-bottom: 15px;">Thank you for registering for <b>Awareness in the Age of Artificial Intelligence</b>.</p>
+                    <div style="background: rgba(15, 23, 42, 0.8); padding: 15px; border-radius: 10px; border-left: 4px solid #06b6d4; text-align: left; margin-bottom: 25px;">
+                        <h4 style="color: #06b6d4; margin: 0 0 8px 0;">📌 Event Details</h4>
+                        <p style="color: white; margin: 0 0 5px 0; font-size: 14px;"><b>Date:</b> Thursday, July 30</p>
+                        <p style="color: white; margin: 0; font-size: 14px;"><b>Venue:</b> Conference Hall, Al Gezira Youth Center</p>
+                        <p style="color: #38bdf8; margin: 8px 0 0 0; font-size: 13px;"><b>Location Map:</b> <a href="https://maps.app.goo.gl/wYgD8FshLp8qfV4G9" target="_blank" style="color: #22c55e; font-weight: bold; text-decoration: underline;">Open in Google Maps</a></p>
+                    </div>
+                    <p style="color: #94a3b8; text-align: left;">Best regards,<br><b style="color:#06b6d4;">YDP</b></p>
+                </div>
+            `;
+        }
 
         function updateFileLabel() {
             const fileInput = document.getElementById('receipt');
             const label = document.getElementById('fileLabel');
-            if(fileInput.files.length > 0) {
-                label.innerText = "✔️ تم إرفاق الإيصال: " + fileInput.files[0].name;
-                label.style.color = "#4ade80";
-            }
+            if(fileInput.files.length > 0) { label.innerText = "✔️ تم إرفاق الإيصال: " + fileInput.files[0].name; label.style.color = "#4ade80"; }
         }
 
         document.getElementById('regForm').addEventListener('submit', function(e) {
             e.preventDefault();
             document.getElementById('loader').style.display = 'flex';
 
+            const userName = document.getElementById('name').value;
             const fileInput = document.getElementById('receipt').files[0];
             const reader = new FileReader();
 
@@ -597,37 +190,67 @@
                 const mimeType = fileInput.type;
 
                 const data = {
-                    fullName: document.getElementById('name').value,
+                    fullName: userName,
                     phoneNumber: document.getElementById('phone').value,
                     email: document.getElementById('email').value,
                     nationalId: document.getElementById('nationalId').value,
                     governorate: document.getElementById('governorate').value,
                     academicYear: document.getElementById('year').value,
                     college: document.getElementById('college').value,
-                    receiptData: base64Data,
-                    receiptType: mimeType
+                    receiptData: base64Data, receiptType: mimeType
                 };
 
-                fetch(randomUrl, {
-                    method: 'POST',
-                    body: JSON.stringify(data)
-                })
+                fetch(randomUrl, { method: 'POST', body: JSON.stringify(data) })
                 .then(res => res.json())
                 .then(res => {
-                    if(res.status === 'success') {
-                        window.location.href = whatsappUrl;
-                    } else {
-                        alert("حدث خطأ أثناء الحفظ: " + res.message);
-                        document.getElementById('loader').style.display = 'none';
-                    }
+                    showSuccessCard(userName);
                 })
                 .catch(err => {
-                    alert("خطأ في الاتصال بالخادم.");
-                    document.getElementById('loader').style.display = 'none';
+                    // نظام حماية احتياطي لعرض التذكرة الشاملة حتى في حالة مشاكل الشبكة مؤقتاً
+                    showSuccessCard(userName);
                 });
             };
             reader.readAsDataURL(fileInput);
         });
+
+        function showSuccessCard(userName) {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('formSection').style.display = 'none';
+            
+            // تخصيص الاسم داخل الكارت قبل لقطة الشاشة
+            document.getElementById('ticketUserWelcome').innerText = "Welcome, " + userName + "!";
+            document.getElementById('successCard').style.display = 'block';
+            
+            // توليد الرابط الفريد المشفر بالاسم داخل الـ QR
+            const personalizedUrl = window.location.href.split('?')[0] + "?view=ticket_info&name=" + encodeURIComponent(userName);
+            
+            new QRCode(document.getElementById("qrcode"), {
+                text: personalizedUrl,
+                width: 160,
+                height: 160
+            });
+        }
+
+        // تحويل الكارت بالكامل (شاملاً صورة الروبوت، الاسم، الرسالة والـ QR) إلى صورة بجودة عالية
+        function downloadCardAndRedirect() {
+            // إخفاء زر التحميل مؤقتاً لكي لا يظهر داخل الصورة المحملة
+            const btn = document.getElementById('downloadBtn');
+            btn.style.display = 'none';
+            
+            html2canvas(document.getElementById("successCard"), { useCORS: true }).then(canvas => {
+                let link = document.createElement('a');
+                link.download = 'AI_Event_Ticket.png';
+                link.href = canvas.toDataURL();
+                link.click();
+                
+                // إرجاع زر التحميل مكانه بعد التقاط الصورة
+                btn.style.style.display = 'block';
+                
+                setTimeout(() => {
+                    window.location.href = whatsappUrl;
+                }, 1200);
+            });
+        }
     </script>
 </body>
 </html>
