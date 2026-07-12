@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>استمارة التسجيل | الوعي في عصر الذكاء الاصطناعي</title>
-    <!-- مكتبات توليد الـ QR Code وتحويل الكارت لصورة قابلة للتحميل -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
@@ -68,7 +67,6 @@
 <body>
 
     <div class="container" id="mainContainer">
-        <!-- قسم الفورم الرئيسي -->
         <div id="formSection">
             <img src="https://i.postimg.cc/W4nwLzq2/Whats-App-Image-2026-02-27-at-4-43-50-PM-(1).png" class="top-logo" alt="Logo">
             <div class="header">
@@ -116,9 +114,7 @@
             </form>
         </div>
 
-        <!-- كارت تذكرة الـ QR Code الذكي الشامل اللي هيتحمل كصورة -->
         <div id="successCard">
-            <!-- صورة الإنسان الآلي متضمنة داخل الكارت ليتم تصويرها -->
             <img src="https://i.postimg.cc/c4rhzWjZ/4246cff6-aa65-4efe-906b-19b94c4ec2e0.png" class="ticket-robot-img" alt="AI Robot">
             
             <h2 class="ticket-welcome" id="ticketUserWelcome">Welcome, Participant!</h2>
@@ -126,7 +122,6 @@
             
             <p class="ticket-msg">Thank you for registering for <b>Awareness in the Age of Artificial Intelligence</b>. We have successfully received your registration details and payment receipt.</p>
             
-            <!-- مكان توليد الـ QR كود داخل الكارت -->
             <div id="qrcode"></div>
             
             <div class="ticket-details-box">
@@ -136,7 +131,6 @@
                 <p><b>Location Map:</b> <a href="https://maps.app.goo.gl/wYgD8FshLp8qfV4G9" target="_blank">Open in Google Maps</a></p>
             </div>
             
-            <!-- زر التحويل والدخول للجروب (لن يظهر في الصورة المحملة) -->
             <button class="btn-download" id="downloadBtn" onclick="downloadCardAndRedirect()">📥 تحميل التذكرة ودخول الجروب</button>
         </div>
     </div>
@@ -206,7 +200,6 @@
                     showSuccessCard(userName);
                 })
                 .catch(err => {
-                    // نظام حماية احتياطي لعرض التذكرة الشاملة حتى في حالة مشاكل الشبكة مؤقتاً
                     showSuccessCard(userName);
                 });
             };
@@ -217,11 +210,9 @@
             document.getElementById('loader').style.display = 'none';
             document.getElementById('formSection').style.display = 'none';
             
-            // تخصيص الاسم داخل الكارت قبل لقطة الشاشة
             document.getElementById('ticketUserWelcome').innerText = "Welcome, " + userName + "!";
             document.getElementById('successCard').style.display = 'block';
             
-            // توليد الرابط الفريد المشفر بالاسم داخل الـ QR
             const personalizedUrl = window.location.href.split('?')[0] + "?view=ticket_info&name=" + encodeURIComponent(userName);
             
             new QRCode(document.getElementById("qrcode"), {
@@ -231,24 +222,25 @@
             });
         }
 
-        // تحويل الكارت بالكامل (شاملاً صورة الروبوت، الاسم، الرسالة والـ QR) إلى صورة بجودة عالية
+        // تحويل الكارت بالكامل إلى صورة بجودة عالية ثم توجيه مباشر ومضمون للواتساب
         function downloadCardAndRedirect() {
-            // إخفاء زر التحميل مؤقتاً لكي لا يظهر داخل الصورة المحملة
             const btn = document.getElementById('downloadBtn');
-            btn.style.display = 'none';
+            btn.style.display = 'none'; // إخفاء الزرار قبل أخذ اللقطة
             
             html2canvas(document.getElementById("successCard"), { useCORS: true }).then(canvas => {
                 let link = document.createElement('a');
                 link.download = 'AI_Event_Ticket.png';
                 link.href = canvas.toDataURL();
+                document.body.appendChild(link);
                 link.click();
+                document.body.removeChild(link); // تنزيل نظيف للملف
                 
-                // إرجاع زر التحميل مكانه بعد التقاط الصورة
-                btn.style.style.display = 'block';
+                btn.style.display = 'block'; // إرجاع الزرار مكانه
                 
+                // فتح رابط جروب الواتساب مباشرة في نافذة جديدة أو نفس النافذة لضمان تخطي حظر المتصفح
                 setTimeout(() => {
-                    window.location.href = whatsappUrl;
-                }, 1200);
+                    window.open(whatsappUrl, '_self');
+                }, 500);
             });
         }
     </script>
