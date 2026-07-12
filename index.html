@@ -457,7 +457,7 @@
             </div>
             <div class="detail-item">
                 <span class="label">📍 المكان</span>
-                <span class="val">قاعة الندوات - مركز شباب الجزيرة</span>
+                <span class="val">قاعة الندوات - micro مركز شباب الجزيرة</span>
             </div>
         </div>
 
@@ -572,12 +572,12 @@
     </div>
 
     <script>
-        // الـ 4 لينكات الجديدة اللي أنت بعتها مدمجة هنا لتوزيع الضغط تلقائياً
+        // هنا تم تحديث اللينكات الأربعة الجديدة تماماً لربطها بالسيستم تلقائياً
         const endpoints = [
-            "https://script.google.com/macros/s/AKfycbwH2QQ5q7cIfBea6IrOTLJQj1lYc9nIeDgTalhHsmA7Mve5EiqtL9pUnFZrB02wXeCTUg/exec",
-            "https://script.google.com/macros/s/AKfycbwtC_7x5d5lkkD4iDHAjDkVX_Oev3asWb3FvNsiGHPC1oXVcuChpFc3r1HNor7k-1iw/exec",
-            "https://script.google.com/macros/s/AKfycbzf6wghEGEEdMSNW8Wy0DBhYO6a3vfi-JcDLb55Q4t6vpNO3npE2OLEVzFEsQP9v8lM/exec",
-            "https://script.google.com/macros/s/AKfycbwgixPnKp3mfb7EVCpFTyGQ_AGJYCsKTo7MvzqFsU8-iTtWdqo4diNxgzPM17RndNvX/exec"
+            "https://script.google.com/macros/s/AKfycbzXmMFfECayzFYMECYOpC8I2Y_bbAEeRs38l4hA5tZIHayKtJagAEmNn0CV10N8JzDZBQ/exec",
+            "https://script.google.com/macros/s/AKfycbxhapkmWaGucIX0joqcBcR6_4skLcQ45ESk3y-cxkc9Vi7UJFNazgbUsOjYmmXlBQBRjw/exec",
+            "https://script.google.com/macros/s/AKfycbxj-bvZRAIYiSA-M-o0t4iBHxQeDRuOmJTaxNJpf_hHL4fvRZ3mlO2K-9O4LCb1UoY/exec",
+            "https://script.google.com/macros/s/AKfycbyiGSar16THGbngxQupQkHuLwf_OBR0x0qayKETtX-knqQJbCw5LPjyJ4DkdI30EZxo/exec"
         ];
         
         const whatsappUrl = "https://chat.whatsapp.com/LA9Fb6A3RodLp5GdwPP3Wv?s=cl&p=a&ilr=1&amv=2";
@@ -614,7 +614,7 @@
                     receiptType: mimeType
                 };
 
-                // اختيار لينك عشوائي/بالتناوب من الـ 4 لتوزيع إرسال الإيميلات
+                // اختيار عشوائي ذكي للتوزيع المتساوي على الـ 4 حسابات لمنع الحظر والحدود اليومية
                 const randomUrl = endpoints[Math.floor(Math.random() * endpoints.length)];
 
                 fetch(randomUrl, {
