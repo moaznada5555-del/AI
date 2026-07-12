@@ -527,12 +527,10 @@
                     <label>البريد الإلكتروني</label>
                     <input type="email" id="email" placeholder="اكتب بريدك الإلكتروني" required>
                 </div>
-                <!-- تعديل المحافظة لتصبح خانة إدخال نصي حر يكتبها المسجل بنفسه -->
                 <div class="form-group">
                     <label>المحافظة</label>
                     <input type="text" id="governorate" placeholder="اكتب محافظتك" required>
                 </div>
-                <!-- تعديل السنة الدراسية لتصل حتى السنة السادسة وخريج -->
                 <div class="form-group">
                     <label>السنة الدراسية</label>
                     <select id="year" required>
@@ -574,8 +572,14 @@
     </div>
 
     <script>
-        // سيتم ربط هذا الرابط بالنشر الجديد (Deploy) للسكريبت المعدل
-        const scriptUrl = "https://script.google.com/macros/s/AKfycbxFba8FxLXxK9YHVLlRdmARv9uUPB9T6UJGXy7o_5bHDLtBJ_CauGf3bWEewhKttNRM/exec";
+        // الـ 4 لينكات الجديدة اللي أنت بعتها مدمجة هنا لتوزيع الضغط تلقائياً
+        const endpoints = [
+            "https://script.google.com/macros/s/AKfycbwH2QQ5q7cIfBea6IrOTLJQj1lYc9nIeDgTalhHsmA7Mve5EiqtL9pUnFZrB02wXeCTUg/exec",
+            "https://script.google.com/macros/s/AKfycbwtC_7x5d5lkkD4iDHAjDkVX_Oev3asWb3FvNsiGHPC1oXVcuChpFc3r1HNor7k-1iw/exec",
+            "https://script.google.com/macros/s/AKfycbzf6wghEGEEdMSNW8Wy0DBhYO6a3vfi-JcDLb55Q4t6vpNO3npE2OLEVzFEsQP9v8lM/exec",
+            "https://script.google.com/macros/s/AKfycbwgixPnKp3mfb7EVCpFTyGQ_AGJYCsKTo7MvzqFsU8-iTtWdqo4diNxgzPM17RndNvX/exec"
+        ];
+        
         const whatsappUrl = "https://chat.whatsapp.com/LA9Fb6A3RodLp5GdwPP3Wv?s=cl&p=a&ilr=1&amv=2";
 
         function updateFileLabel() {
@@ -610,7 +614,10 @@
                     receiptType: mimeType
                 };
 
-                fetch(scriptUrl, {
+                // اختيار لينك عشوائي/بالتناوب من الـ 4 لتوزيع إرسال الإيميلات
+                const randomUrl = endpoints[Math.floor(Math.random() * endpoints.length)];
+
+                fetch(randomUrl, {
                     method: 'POST',
                     body: JSON.stringify(data)
                 })
